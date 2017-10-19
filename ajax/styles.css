@@ -1,0 +1,47 @@
+.app > div {
+  height: 100%;
+}
+
+header {
+  background: #202020;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  color: white;
+}
+
+main {
+  height: calc(100% - 40px);
+  overflow: auto;
+}
+
+.photos {
+  height: 100%;
+  overflow: auto;
+  background: #202020;
+  border-top: 1px solid #111;
+  text-align: center;
+}
+.photos img {
+  border: 1px solid #222;
+  float: left;
+  width: 148px;
+  height: 148px;
+  animation: img-appear .5s;
+  transition: .4s all;
+  position: relative;
+}
+.photos img:active {
+  transform: scale(0.95);
+  transition-duration: .1s;
+  opacity: .9;
+}
+
+@keyframes img-appear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
