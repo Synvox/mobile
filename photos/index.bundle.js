@@ -12,10 +12,10 @@ const require = (key)=>{
   return module.exports
 }
 
-require('/ajax/index.js')
+require('/photos/index.js')
 
 })({
-"/ajax/index.js":(module, require)=>{
+"/photos/index.js":(module, require)=>{
 const photosElement = document.querySelector('.photos')
 const shuffle = (arr)=>arr
   .reduce((arr, item)=>{

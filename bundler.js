@@ -2,8 +2,8 @@ const path = require('path')
 const fs = require('fs')
 
 const entryPoints = {
-  './localStorage/index.js': './localStorage/index.bundle.js',
-  './ajax/index.js': './ajax/index.bundle.js'
+  './todo/index.js': './todo/index.bundle.js',
+  './photos/index.js': './photos/index.bundle.js'
 }
 
 const trimPath = path=>path.replace(__dirname, '')

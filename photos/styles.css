@@ -25,7 +25,7 @@ main {
 .photos img {
   border: 1px solid #222;
   float: left;
-  width: 148px;
+  width: 50%;
   height: 148px;
   animation: img-appear .5s;
   transition: .4s all;

@@ -12,10 +12,10 @@ const require = (key)=>{
   return module.exports
 }
 
-require('/localStorage/index.js')
+require('/todo/index.js')
 
 })({
-"/localStorage/index.js":(module, require)=>{
+"/todo/index.js":(module, require)=>{
 const storage = require('/shared/storage.js')
 const dom = require('/shared/dom.js')
 const db = storage.open('localstorage-todos')
