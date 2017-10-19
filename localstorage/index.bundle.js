@@ -7,7 +7,7 @@ const require = (key)=>{
     return instances[key].exports
 
   const module = {exports:{}}
-  modules[key](module)
+  modules[key](module, require)
   instances[key] = module
   return module.exports
 }
@@ -15,7 +15,7 @@ const require = (key)=>{
 require('/localStorage/index.js')
 
 })({
-"/localStorage/index.js":(module)=>{
+"/localStorage/index.js":(module, require)=>{
 const storage = require('/shared/storage.js')
 const dom = require('/shared/dom.js')
 const db = storage.open('localstorage-todos')
@@ -73,7 +73,7 @@ const rebuild = ()=>{
 rebuild()
 
 },
-"/shared/storage.js":(module)=>{
+"/shared/storage.js":(module, require)=>{
 const genId = (
   type,
   hash=(
@@ -194,7 +194,7 @@ const local = new Storage({
 module.exports = local
 
 },
-"/shared/dom.js":(module)=>{
+"/shared/dom.js":(module, require)=>{
 const createNode = (nodeName, ...children)=>{
   const node = document.createElement(nodeName)
   const attributes = typeof children[0] ===  'object' && !(children[0] instanceof Node) && !Array.isArray(children[0])

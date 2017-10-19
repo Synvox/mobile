@@ -7,7 +7,7 @@ const require = (key)=>{
     return instances[key].exports
 
   const module = {exports:{}}
-  modules[key](module)
+  modules[key](module, require)
   instances[key] = module
   return module.exports
 }
@@ -15,7 +15,7 @@ const require = (key)=>{
 require('/ajax/index.js')
 
 })({
-"/ajax/index.js":(module)=>{
+"/ajax/index.js":(module, require)=>{
 const photosElement = document.querySelector('.photos')
 const shuffle = (arr)=>arr
   .reduce((arr, item)=>{

@@ -41,7 +41,7 @@ const main = ()=>{
     getImports(path.resolve(__dirname, input), imported)
 
     const modules = '{\n'+Object.keys(imported)
-      .map((key)=>(`"${key}":(module)=>{\n${imported[key]}\n}`))
+      .map((key)=>(`"${key}":(module, require)=>{\n${imported[key]}\n}`))
       .join(',\n')+'\n}'
 
     const code = `// This is a generated file.
@@ -53,7 +53,7 @@ const require = (key)=>{
     return instances[key].exports
 
   const module = {exports:{}}
-  modules[key](module)
+  modules[key](module, require)
   instances[key] = module
   return module.exports
 }
