@@ -11,11 +11,12 @@ fetch('https://picsum.photos/list')
     shuffle(data).slice(0,90).forEach(({id}, index)=>{
       const div = document.createElement('div')
       div.classList.add('img')
+      div.onclick = ()=>div.classList.toggle('selected')
       const img = document.createElement('img')
-      div.appendChild(img)
       window.setTimeout(()=>{
         img.src = `https://picsum.photos/200/200?image=${id}&nocache=${Date.now()}`
         img.onload = ()=>{
+          div.style.backgroundImage = `url(${img.src})`
           photosElement.appendChild(div)
         }
       }, index * 100)
