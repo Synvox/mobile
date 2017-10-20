@@ -23,7 +23,7 @@ const Todos = db.model('todos')
 
 const createTodo = (e)=>{
   e.preventDefault()
-  const text = new FormData(e.target).get('text')
+  const text = e.target.querySelector('input[type="text"]').value
   const todo = Todos.create({finished: false, text})
   todo.save()
   rebuild()
@@ -38,7 +38,7 @@ const toggleTodo = (id)=>(e)=>{
 }
 
 const render = ()=>{
-  const {header, main, div, input, form, button} = dom
+  const {header, main, div, input, form} = dom
   const todos = Todos.find()
   return div(
     header('To-do'),
@@ -48,7 +48,7 @@ const render = ()=>{
       ),
       form({onsubmit: createTodo},
         input({type: 'text', placeholder: 'Create a new To-do item', name: 'text'}),
-        button({hidden: true})
+        input({type: 'submit', style:'display: none'})
       )
     )
   )
