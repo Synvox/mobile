@@ -12,7 +12,8 @@ header {
 
 main {
   height: calc(100% - 44px);
-  overflow: auto;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
 .photos {

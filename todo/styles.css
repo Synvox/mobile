@@ -12,8 +12,9 @@ header {
 
 main {
   height: calc(100% - 44px);
-  overflow: auto;
   padding-bottom: 50px;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
 main input[type="text"] {
