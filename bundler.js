@@ -3,7 +3,8 @@ const fs = require('fs')
 
 const entryPoints = {
   './todo/index.js': './todo/index.bundle.js',
-  './photos/index.js': './photos/index.bundle.js'
+  './photos/index.js': './photos/index.bundle.js',
+  './book/index.js': './book/index.bundle.js'
 }
 
 const trimPath = path=>path.replace(__dirname, '')
