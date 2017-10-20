@@ -4,14 +4,14 @@
 
 header {
   background: #202020;
-  height: 40px;
-  line-height: 40px;
+  height: 44px;
+  line-height: 44px;
   text-align: center;
   color: white;
 }
 
 main {
-  height: calc(100% - 40px);
+  height: calc(100% - 44px);
   overflow: auto;
 }
 
