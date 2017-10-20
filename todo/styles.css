@@ -28,8 +28,8 @@ main input[type="text"] {
 }
 main input[type="text"]:focus {
   outline: none;
-  border-top: 1px solid #ccc;
-  background: #fafafa;
+  border-top: 1px solid #ddd;
+  background: #fdfdfd;
 }
 
 main label input[type="checkbox"] {
@@ -37,14 +37,15 @@ main label input[type="checkbox"] {
 }
 main form.todo {
   position: relative;
+  border-bottom: 1px solid #eee;
 }
 main label {
   position: absolute;
   left: 0;
   width: 100%;
   display: inline-block;
-  padding: 4px 12px;
-  padding-left: 30px;
+  padding: 8px 12px;
+  padding-left: 35px;
   transition-duration: .2s;
   white-space: nowrap;
   overflow: hidden;
@@ -53,15 +54,29 @@ main label {
 main form.todo:hover {
   background: rgba(0,0,0,.02)
 }
+main form.todo:active {
+  background: rgba(0,0,0,.04)
+}
 
 main form.todo:before {
   display: inline-block;
-  padding: 4px 12px;
+  padding: 8px 12px;
   content: '✓';
   pointer-events: none;
-  color: #ccc;
+  color: transparent;
+  box-shadow: 0px 0px 0px 2px #00b300 inset;
+  background: #47cb47;
+  color: #fff;
+  text-shadow: 0px 1px 1px rgba(0,0,0,.3);
+  border-radius: 1000px;
+  transform: scale(.6);
+  transition-duration: .5s;
 }
 
-main form.todo:valid:before {
-  color: #00b300;
+main form.todo:invalid:before {
+  text-shadow: none;
+  box-shadow: 0px 0px 0px 2px #ccc inset;
+  background: #fff;
+  color: #ccc;
+  opacity: 1;
 }

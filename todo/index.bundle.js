@@ -41,13 +41,13 @@ const render = ()=>{
   const {header, main, div, input, form, button} = dom
   const todos = Todos.find()
   return div(
-    header('Header'),
+    header('To-do'),
     main(
       div(
         todos.map(TodoView)
       ),
       form({onsubmit: createTodo},
-        input({type: 'text', placeholder: 'Create a new Todo-item', name: 'text'}),
+        input({type: 'text', placeholder: 'Create a new To-do item', name: 'text'}),
         button({hidden: true})
       )
     )
