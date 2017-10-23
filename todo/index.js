@@ -1,5 +1,5 @@
 const storage = require('../shared/storage.js')
-const dom = require('../shared/dom.js')
+const {factory, assign} = require('../shared/dom.js')
 const db = storage.open('localstorage-todos')
 const Todos = db.model('todos')
 
@@ -20,7 +20,7 @@ const toggleTodo = (id)=>(e)=>{
 }
 
 const render = ()=>{
-  const {header, main, div, input, form} = dom
+  const {header, main, div, input, form} = factory
   const todos = Todos.find()
   return div(
     header('To-do'),
@@ -37,19 +37,15 @@ const render = ()=>{
 }
 
 const TodoView = ({id, finished, text})=>{
-  const {input, label, form} = dom
-  return form({class: 'todo'},label(
+  const {input, label, form} = factory
+  return form({class: 'todo', key: id},label(
     input({type:'checkbox', required: true, checked: finished, onclick:toggleTodo(id)}),
     text
   ))
 }
 
 const app = document.querySelector('.app')
+const root = render()
+app.appendChild(root)
 
-const rebuild = ()=>{
-  while(app.firstChild)
-    app.removeChild(app.firstChild)
-  app.appendChild(render())
-}
-
-rebuild()
+const rebuild = ()=>assign(root, render())
