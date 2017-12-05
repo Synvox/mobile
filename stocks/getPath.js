@@ -17,10 +17,7 @@ module.exports = ({max, min, data}, key)=>{
     }))
 
   return [
-    // `M ${0},${height+100}`,
     `M ${points[0].x},${points[0].y}`,
     points.reduce((str, {x,y})=>`${str}L${x},${y}`,''),
-    // `L ${width+10},${points[points.length-1].y}`,
-    // `L ${width+10},${height+100}`
   ].join('')
 }
