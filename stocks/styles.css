@@ -1,0 +1,228 @@
+.statusbar {
+  background: #151515 !important;
+}
+.app > div {
+  height: 100%;
+  display: grid;
+  perspective: 100vw;
+}
+
+.screen {
+  background: #202020 !important;
+}
+:root {
+  --stock-color: #888888;
+}
+
+.stock {
+  height: 100%;
+  grid-template-rows: 28% 30% 42%;
+  grid-template-columns: auto;
+  grid-template-areas: "header" "body" "footer";
+
+}
+.stock > div { height: 100%; }
+.stock.up {
+  --stock-color: #03f35a;
+}
+.stock.down {
+  --stock-color: #d84027;
+}
+
+main {
+  height: calc(100% - 44px);
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+
+.stock-header {
+  grid-area: header;
+  background: #151515;
+  padding: 20px;
+  color: white;
+  height: 100%;
+  border-bottom: 1px solid #242424;
+  position: relative;
+}
+.stock-header h1 {
+  font-size: 1.5em;
+  margin: 0;
+  /* animation: .5s fade-in; */
+  /* animation-delay: .1s; */
+  /* animation-fill-mode: both; */
+  text-shadow: 0px 1px 2px #00000099;
+  font-weight: 100;
+  letter-spacing: 0.08em;
+  text-align: center;
+  opacity: .8;
+}
+.stock-header h1.anim {
+  animation: fade-in .5s;
+}
+.stock-header .closing-price {
+  text-align: center;
+  font-size: 2.5em;
+  margin-top: 10px;
+  font-weight: 100;
+}
+.stock-header .closing-price.anim {
+  animation: fade-down .75s;
+}
+.stock-header .closing-price>.dollar {
+  font-size: .7em;
+  opacity: .5;
+}
+.stock-header .deltas {
+  text-align: center;
+  color: var(--stock-color);
+  transition-duration: .5s;
+}
+.stock-header .deltas>span {
+  display: inline-block;
+  padding: 10px 20px;
+}
+.stock-header .links {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0px;
+  text-align: center;
+}
+.stock-header .links a:link {
+  display: inline-block;
+  width: 33%;
+  padding: 5px 0px;
+  color: rgba(255,255,255,.8);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition-duration: .2s;
+  text-transform: uppercase;
+  font-size: .8em;
+}
+.stock-header .links a:visited {
+  color: rgba(255, 255, 255, .8);
+}
+.stock-header .links a:hover,
+.stock-header .links a.active {
+  border-bottom-color: var(--stock-color);
+  transition-duration: .5s;
+}
+.stock-body {
+  grid-area: body;
+  background: #0f0f0f;
+}
+.stock-body svg {
+  animation-delay: .75s;
+  animation-fill-mode: both;
+  pointer-events: none;
+}
+.stock-body svg path.stock-path {
+  animation: .3s line-anim;
+  animation-timing-function: linear;
+  animation-delay: .1s;
+  animation-fill-mode: both;
+  transition-duration: .5s;
+}
+
+.stock-footer {
+  grid-area: footer;
+  background: #151515;
+  color: white;
+  height: 100%;
+  min-height: 260px;
+  border-top: 1px solid #242424;
+  position: relative;
+}
+.stock-footer .item {
+  z-index: 10000;
+  width: calc(50% - 6px);
+  float: left;
+  text-align: center;
+  line-height: 34px;
+  transition-duration: .2s;
+  border: 2px solid transparent;
+  margin: 3px;
+  border-radius: 3px;
+  cursor: pointer;
+  opacity: .8;
+  transform-origin: 50% 100%;
+}
+.stock-footer .item:hover {
+  background: rgba(255,255,255,.1);
+}
+.stock-footer .item.up {
+  border-color: #03f35741;
+}
+.stock-footer .item.down {
+  border-color: #d83f275e;
+}
+.stock-footer .item:active {
+  transform: scale(.98);
+}
+.stock-footer .item.active {
+  opacity: 1;
+}
+.stock-footer .item.active.up {
+  background-color: #03f35a;
+  border-color: #03f35a;
+  color: rgba(0,0,0,.8);
+}
+.stock-footer .item.active.down {
+  background-color: #d84027;
+  border-color: #d84027;
+  color: rgba(0,0,0,.8);
+}
+
+.spinner {
+  width: 30px;
+  height: 30px;
+  border: 4px solid #03f35a;
+  border-bottom: 0px;
+  border-left: 0px;
+  border-top-right-radius: 100px;
+  animation: spinner-anim .5s linear infinite;
+  transform-origin: 0% 100%;
+  position: absolute;
+  left: 50%;
+  top: calc(50% - 30px);
+}
+
+@keyframes spinner-anim {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+@keyframes fade-down {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+@keyframes line-anim {
+  0% {
+    stroke-dasharray: 0, 1000;
+  }
+  100% {
+    stroke-dasharray: 1000, 0;
+  }
+}

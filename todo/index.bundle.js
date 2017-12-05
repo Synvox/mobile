@@ -193,8 +193,11 @@ module.exports = local
 "/shared/dom.js":(module, require)=>{
 const EVENTS = Object.keys(Object.getOwnPropertyDescriptors(HTMLElement).prototype.value).filter(k=>k.startsWith('on'))
 
-const createNode = (nodeName, ...children)=>{
-  const node = document.createElement(nodeName)
+const createNode = (nodeName, isSVG, ...children)=>{
+  const node = isSVG
+    ? document.createElementNS('http://www.w3.org/2000/svg',nodeName)
+    : document.createElement(nodeName)
+
   const attributes = typeof children[0] ===  'object' && !(children[0] instanceof Node) && !Array.isArray(children[0])
     ? children.shift()
     : null
@@ -204,7 +207,9 @@ const createNode = (nodeName, ...children)=>{
       const value = attributes[key]
       node[key] = value
       if (typeof value !== 'function' && value !== false)
-        node.setAttribute(key, value === true ? '' : value)
+        isSVG
+        ? node.setAttributeNS(null, key, value === true ? '' : value)
+        : node.setAttribute(key, value === true ? '' : value)
     }
   }
 
@@ -224,7 +229,13 @@ const createNode = (nodeName, ...children)=>{
 const factory = new Proxy({},{
   get: (obj, prop)=>
     (...children)=>
-      createNode(prop, ...children)
+      createNode(prop, false, ...children)
+})
+
+const svgFactory = new Proxy({},{
+  get: (obj, prop)=>
+    (...children)=>
+      createNode(prop, true, ...children)
 })
 
 const assign = (oldNode, newNode)=>{
@@ -317,12 +328,16 @@ const assignChildren = (oldNode, newNode)=>{
 
 const isSameNode = (a, b)=>{
   if (a.id === b.id) return true
+  if (a.nodeType === Node.TEXT_NODE) return a.textContent === b.textContent
   if (a.getAttribute('key') && a.getAttribute('key') === b.getAttribute('key')) return true
-  if (a.type === Node.TEXT_NODE) return a.textContent === b.textContent
   return false
 }
 
-module.exports = {factory, assign}
+module.exports = {
+  factory,
+  assign,
+  svgFactory
+}
 
 }
 });
